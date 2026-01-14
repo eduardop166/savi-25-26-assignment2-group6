@@ -1,0 +1,408 @@
+{
+  "scene_dir": "C:\\UNIVERSIDADE\\Mestrado\\2o Ano\\SAVI\\savi-25-26-assignment2-group6\\data_scenes\\versionA",
+  "split": "test",
+  "params": {
+    "scene_dir": "C:\\UNIVERSIDADE\\Mestrado\\2o Ano\\SAVI\\savi-25-26-assignment2-group6\\data_scenes\\versionA",
+    "split": "test",
+    "weights": "Tarefa3/model.pth",
+    "out_dir": "./experiments/tarefa3_sliding_v2",
+    "max_images": 25,
+    "stride": 6,
+    "window_sizes": "28",
+    "batch_windows": 256,
+    "conf_thr": 0.995,
+    "entropy_thr": 1.0,
+    "min_maxpix": 20,
+    "min_box": 0,
+    "nms_iou": 0.15,
+    "contain_thr": 0.6,
+    "keep_topk": 0,
+    "assume_single_digit": false
+  },
+  "results": [
+    {
+      "file": "000000.png",
+      "detections": [
+        {
+          "bbox": [
+            30,
+            30,
+            28,
+            28
+          ],
+          "label": 5,
+          "score": 0.9976054430007935
+        }
+      ]
+    },
+    {
+      "file": "000001.png",
+      "detections": [
+        {
+          "bbox": [
+            18,
+            42,
+            28,
+            28
+          ],
+          "label": 2,
+          "score": 0.9978480339050293
+        }
+      ]
+    },
+    {
+      "file": "000002.png",
+      "detections": [
+        {
+          "bbox": [
+            12,
+            72,
+            28,
+            28
+          ],
+          "label": 5,
+          "score": 0.9968511462211609
+        }
+      ]
+    },
+    {
+      "file": "000003.png",
+      "detections": [
+        {
+          "bbox": [
+            24,
+            42,
+            28,
+            28
+          ],
+          "label": 3,
+          "score": 1.0
+        }
+      ]
+    },
+    {
+      "file": "000004.png",
+      "detections": [
+        {
+          "bbox": [
+            6,
+            48,
+            28,
+            28
+          ],
+          "label": 0,
+          "score": 0.9997891783714294
+        }
+      ]
+    },
+    {
+      "file": "000005.png",
+      "detections": [
+        {
+          "bbox": [
+            78,
+            90,
+            28,
+            28
+          ],
+          "label": 5,
+          "score": 0.9999746084213257
+        }
+      ]
+    },
+    {
+      "file": "000006.png",
+      "detections": [
+        {
+          "bbox": [
+            96,
+            90,
+            28,
+            28
+          ],
+          "label": 7,
+          "score": 0.999987006187439
+        }
+      ]
+    },
+    {
+      "file": "000007.png",
+      "detections": [
+        {
+          "bbox": [
+            60,
+            54,
+            28,
+            28
+          ],
+          "label": 0,
+          "score": 0.9985332489013672
+        }
+      ]
+    },
+    {
+      "file": "000008.png",
+      "detections": [
+        {
+          "bbox": [
+            72,
+            24,
+            28,
+            28
+          ],
+          "label": 3,
+          "score": 1.0
+        },
+        {
+          "bbox": [
+            60,
+            42,
+            28,
+            28
+          ],
+          "label": 5,
+          "score": 0.9993788003921509
+        }
+      ]
+    },
+    {
+      "file": "000009.png",
+      "detections": [
+        {
+          "bbox": [
+            90,
+            54,
+            28,
+            28
+          ],
+          "label": 4,
+          "score": 0.9999605417251587
+        }
+      ]
+    },
+    {
+      "file": "000010.png",
+      "detections": [
+        {
+          "bbox": [
+            66,
+            12,
+            28,
+            28
+          ],
+          "label": 5,
+          "score": 0.9999997615814209
+        }
+      ]
+    },
+    {
+      "file": "000011.png",
+      "detections": [
+        {
+          "bbox": [
+            78,
+            42,
+            28,
+            28
+          ],
+          "label": 1,
+          "score": 0.9999078512191772
+        }
+      ]
+    },
+    {
+      "file": "000012.png",
+      "detections": [
+        {
+          "bbox": [
+            6,
+            96,
+            28,
+            28
+          ],
+          "label": 0,
+          "score": 0.9997543692588806
+        }
+      ]
+    },
+    {
+      "file": "000013.png",
+      "detections": [
+        {
+          "bbox": [
+            0,
+            12,
+            28,
+            28
+          ],
+          "label": 9,
+          "score": 0.9996028542518616
+        }
+      ]
+    },
+    {
+      "file": "000014.png",
+      "detections": [
+        {
+          "bbox": [
+            42,
+            48,
+            28,
+            28
+          ],
+          "label": 4,
+          "score": 0.9994237422943115
+        }
+      ]
+    },
+    {
+      "file": "000015.png",
+      "detections": [
+        {
+          "bbox": [
+            30,
+            96,
+            28,
+            28
+          ],
+          "label": 3,
+          "score": 1.0
+        }
+      ]
+    },
+    {
+      "file": "000016.png",
+      "detections": [
+        {
+          "bbox": [
+            6,
+            84,
+            28,
+            28
+          ],
+          "label": 7,
+          "score": 0.9999979734420776
+        }
+      ]
+    },
+    {
+      "file": "000017.png",
+      "detections": [
+        {
+          "bbox": [
+            30,
+            18,
+            28,
+            28
+          ],
+          "label": 5,
+          "score": 0.9966012239456177
+        }
+      ]
+    },
+    {
+      "file": "000018.png",
+      "detections": [
+        {
+          "bbox": [
+            0,
+            72,
+            28,
+            28
+          ],
+          "label": 2,
+          "score": 0.9994440674781799
+        }
+      ]
+    },
+    {
+      "file": "000019.png",
+      "detections": [
+        {
+          "bbox": [
+            0,
+            36,
+            28,
+            28
+          ],
+          "label": 3,
+          "score": 0.9999666213989258
+        }
+      ]
+    },
+    {
+      "file": "000020.png",
+      "detections": [
+        {
+          "bbox": [
+            96,
+            42,
+            28,
+            28
+          ],
+          "label": 1,
+          "score": 0.9995942711830139
+        }
+      ]
+    },
+    {
+      "file": "000021.png",
+      "detections": [
+        {
+          "bbox": [
+            48,
+            48,
+            28,
+            28
+          ],
+          "label": 3,
+          "score": 0.9999997615814209
+        },
+        {
+          "bbox": [
+            36,
+            66,
+            28,
+            28
+          ],
+          "label": 5,
+          "score": 0.9983683228492737
+        }
+      ]
+    },
+    {
+      "file": "000022.png",
+      "detections": [
+        {
+          "bbox": [
+            72,
+            84,
+            28,
+            28
+          ],
+          "label": 5,
+          "score": 1.0
+        }
+      ]
+    },
+    {
+      "file": "000023.png",
+      "detections": [
+        {
+          "bbox": [
+            30,
+            90,
+            28,
+            28
+          ],
+          "label": 6,
+          "score": 0.9999901056289673
+        }
+      ]
+    },
+    {
+      "file": "000024.png",
+      "detections": []
+    }
+  ]
+}

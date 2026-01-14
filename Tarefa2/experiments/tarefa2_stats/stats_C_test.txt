@@ -1,0 +1,24 @@
+Dataset: ../data_scenes/C | split: test
+Num images: 400
+Total digits (instances): 1598
+
+Digits per image:
+  mean=3.995  std=0.828
+  min=3  max=5
+
+BBox size (w/h):
+  mean_w=28.00 mean_h=28.00
+  min_w=28 max_w=28
+  min_h=28 max_h=28
+
+Class distribution:
+  0: 163
+  1: 178
+  2: 163
+  3: 151
+  4: 168
+  5: 155
+  6: 145
+  7: 155
+  8: 152
+  9: 168

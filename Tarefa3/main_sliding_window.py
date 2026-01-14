@@ -109,29 +109,38 @@ def main():
     parser.add_argument("--split", type=str, default="test", choices=["train", "test"])
     parser.add_argument("--weights", type=str, required=True,
                         help="Caminho para model.pth da T1")
-    parser.add_argument("--out_dir", type=str, default="./experiments/tarefa3_sliding_v2")
+    parser.add_argument("--out_dir", type=str, default="./experiments/tarefa3_final")
 
     # varrimento
-    parser.add_argument("--max_images", type=int, default=25)
-    parser.add_argument("--stride", type=int, default=6)
-    parser.add_argument("--window_sizes", type=str, default="28")
-    parser.add_argument("--batch_windows", type=int, default=256)
+    parser.add_argument("--max_images", type=int, default=100)
+    parser.add_argument("--stride", type=int, default=5) # Reduzi um pouco para ser mais preciso
+    
+    # ALTERAÇÃO: Adicionei 40 para apanhar numeros maiores
+    parser.add_argument("--window_sizes", type=str, default="28,40") 
+    parser.add_argument("--batch_windows", type=int, default=512) # Aumentei batch para GPU
 
     # filtros
-    parser.add_argument("--conf_thr", type=float, default=0.995)
-    parser.add_argument("--entropy_thr", type=float, default=1.0)
-    parser.add_argument("--min_maxpix", type=int, default=20,
-                        help="se crop.max() < isto, ignora (fundo)")
+    # ALTERAÇÃO: Baixei conf_thr para 0.85 (0.995 é muito exigente para numeros ruidosos)
+    parser.add_argument("--conf_thr", type=float, default=0.85) 
+    parser.add_argument("--entropy_thr", type=float, default=0.8)
+    
+    # ALTERAÇÃO: Mudei de min_maxpix para min_std (desvio padrão).
+    # Se std < 10, é fundo liso (preto ou branco)
+    parser.add_argument("--min_std", type=float, default=10.0,
+                        help="se std(crop) < isto, ignora (fundo liso)")
+    
     parser.add_argument("--min_box", type=int, default=0,
                         help="ignora bboxes com w/h < min_box (0 desliga)")
 
     # NMS forte
-    parser.add_argument("--nms_iou", type=float, default=0.15)
+    parser.add_argument("--nms_iou", type=float, default=0.2)
     parser.add_argument("--contain_thr", type=float, default=0.6)
 
     # pós-processamento
     parser.add_argument("--keep_topk", type=int, default=0,
                         help="se >0, mantém só top-K por score (0 desliga)")
+    
+    # IMPORTANTE: Para a Tarefa 3, nunca uses isto ativado!
     parser.add_argument("--assume_single_digit", action="store_true",
                         help="para datasets A/B: mantém só a melhor deteção por imagem")
 
@@ -140,17 +149,24 @@ def main():
 
     # ---- load model ----
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print(f"Running on {device}")
     model = ModelBetterCNN().to(device)
     state = torch.load(args.weights, map_location=device)
     model.load_state_dict(state)
     model.eval()
 
     # ---- list images ----
-    img_dir = os.path.join(args.scene_dir, args.split, "images")
-    if not os.path.isdir(img_dir):
-        raise FileNotFoundError(f"Não encontrei: {img_dir}")
+    # Ajuste para encontrar imagens mesmo se a pasta não tiver subpasta 'images'
+    if os.path.isdir(os.path.join(args.scene_dir, args.split, "images")):
+        img_dir = os.path.join(args.scene_dir, args.split, "images")
+    else:
+        # Fallback: assume que a pasta scene_dir já tem as imagens
+        img_dir = args.scene_dir
 
-    all_imgs = sorted([f for f in os.listdir(img_dir) if f.lower().endswith(".png")])
+    if not os.path.isdir(img_dir):
+        raise FileNotFoundError(f"Não encontrei pasta de imagens em: {img_dir}")
+
+    all_imgs = sorted([f for f in os.listdir(img_dir) if f.lower().endswith((".png", ".jpg"))])
     all_imgs = all_imgs[: max(1, min(args.max_images, len(all_imgs)))]
 
     win_sizes = parse_window_sizes(args.window_sizes)
@@ -179,8 +195,9 @@ def main():
                 for x in range(0, W - ws + 1, args.stride):
                     crop = arr[y:y + ws, x:x + ws]
 
-                    # filtro rápido de fundo
-                    if int(crop.max()) < args.min_maxpix:
+                    # --- ALTERAÇÃO: Filtro de Desvio Padrão ---
+                    # Muito melhor que max() para ignorar fundos
+                    if np.std(crop) < args.min_std:
                         continue
 
                     # (opcional) filtrar por tamanho mínimo
@@ -252,6 +269,8 @@ def main():
             scores = [scores[int(i)] for i in order]
 
         # ---------- single-digit mode (A/B) ----------
+        # ALTERAÇÃO: Adicionei esta verificação extra para garantir que não corre na Tarefa 3
+        # Só corre se o user pedir explicitamente E se houver scores
         if args.assume_single_digit and len(scores) > 0:
             best = int(np.argmax(np.array(scores)))
             boxes, labels, scores = [boxes[best]], [labels[best]], [scores[best]]
@@ -260,8 +279,8 @@ def main():
         out_img = im.convert("RGB")
         draw = ImageDraw.Draw(out_img)
         for (x, y, w, h), lab, sc in zip(boxes, labels, scores):
-            draw.rectangle([x, y, x + w, y + h], outline=(255, 0, 0), width=2)
-            draw.text((x, max(0, y - 10)), f"{lab} {sc:.2f}", fill=(255, 0, 0))
+            draw.rectangle([x, y, x + w, y + h], outline=(0, 255, 0), width=2)
+            draw.text((x, max(0, y - 10)), f"{lab} {sc:.2f}", fill=(0, 255, 0))
 
         out_path = os.path.join(args.out_dir, f"det_{os.path.splitext(fname)[0]}.png")
         out_img.save(out_path)

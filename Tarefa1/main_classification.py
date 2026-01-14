@@ -15,7 +15,7 @@ def main():
     parser.add_argument("--dataset_folder", type=str, default="./data_mnist",
                         help="Pasta onde o torchvision vai guardar/ler o MNIST")
     parser.add_argument("--percentage_examples", type=float, default=1.0)
-    parser.add_argument("--num_epochs", type=int, default=10)
+    parser.add_argument("--num_epochs", type=int, default=1)
     parser.add_argument("--batch_size", type=int, default=128)
     parser.add_argument("--lr", type=float, default=1e-3)
     parser.add_argument("--num_workers", type=int, default=2)

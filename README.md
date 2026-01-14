@@ -38,7 +38,7 @@ Entra na pasta:
     cd ../tarefa2
 
 ## Gerar dataset (exemplo: D) (há 4 opcoes, A,B,C e D)
-Começa pequeno:
+Começa pequeno:e
 
     python3 main_generate_dataset.py --version D --out_dir ../data_scenes/D --canvas_size 128 --n_train 2000 --n_test 400
 
@@ -96,6 +96,28 @@ Outputs:
     - usa o modelo para prever as janelas.
 
 ---
+
+
+# Tarefa 4 
+
+
+cd ../tarefa4
+
+Ensinar a rede a localizar os dígitos e a distinguir o fundo.
+python train_tarefa4.py
+
+Será gerado um ficheiro de pesos em 
+experiments/tarefa4/model_integrated.pth
+
+
+Processar imagens individuais ou pastas inteiras de "cenas".
+python detect_tarefa4.py --scene "caminho/para/pasta_de_imagens"
+
+As imagens com as caixas verdes e as respetivas labels e scores serão guardadas em 
+experiments/tarefa4/results.
+
+
+
 
 ## COMENTARIOSSS!!
 
