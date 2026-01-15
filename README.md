@@ -26,7 +26,7 @@ O desempenho do modelo foi avaliado no conjunto de teste do MNIST através das s
 
 A tabela seguinte apresenta os valores obtidos para cada dígito:
 
-![Tabela de Resultados - Tarefa 1](Imagens/tabela1.png) | ![Tabela de Resultados - Tarefa 1](Imagens/tabela2.png) 
+![Tabela de Resultados - Tarefa 1](Imagens/Tabela1.png) | ![Tabela de Resultados - Tarefa 1](Imagens/Tabela2.png) 
 
 
 
@@ -52,9 +52,9 @@ O dataset é gerado criando imagens vazias onde são colocados aleatoriamente d�
 
 Foram definidas quatro variantes:
 
-- **Dataset A:** uma imagem contém **apenas um dígito**, com tamanho fixo.
-- **Dataset B:** uma imagem contém **apenas um dígito**, mas com **variação de escala**.
-- **Dataset C:** uma imagem contém **múltiplos dígitos**, com tamanho fixo.
+- **Dataset A:** uma imagem contém **apenas um dígito**, com tamanho fixo (28).
+- **Dataset B:** uma imagem contém **apenas um dígito**, mas com **variação de escala** (22-36).
+- **Dataset C:** uma imagem contém **múltiplos dígitos** (3-5), com tamanho fixo.
 - **Dataset D:** uma imagem contém **múltiplos dígitos** e **variação de escala**.
 
 Para cada versão foram gerados conjuntos de treino e teste, sendo posteriormente calculadas estatísticas do dataset, tais como:
@@ -70,16 +70,16 @@ Para cada versão foram gerados conjuntos de treino e teste, sendo posteriorment
 Abaixo apresentam-se exemplos visuais e estatísticas de cada versão do dataset. As imagens ilustram tanto a **estrutura das cenas** como a **distribuição dos dígitos**, permitindo comparar a complexidade entre as quatro variantes.
 
 #### Dataset A
-![Dataset A](Imagens/mosaic_A.png)
+![Dataset A](Imagens/mosaic_versionA_test.png)
 
 #### Dataset B
-![Dataset B](Imagens/mosaic_B.png)
+![Dataset B](Imagens/mosaic_B_test.png)
 
 #### Dataset C
-![Dataset C](Imagens/mosaic_C.png)
+![Dataset C](Imagens/mosaic_C_test.png)
 
 #### Dataset D
-![Dataset D](Imagens/mosaic_D.png)
+![Dataset D](Imagens/mosaic_D_test.png)
 
 De forma geral, observa-se um aumento progressivo da complexidade dos dados desde o **Dataset A** até ao **Dataset D**, o que permite avaliar o impacto da densidade de objetos e da variação de tamanho na deteção de dígitos nas tarefas seguintes.
 
@@ -114,10 +114,10 @@ De seguida apresentam-se exemplos de deteção para cada versão do dataset. As 
 ![Deteção - Dataset B](Imagens/T3B_.png)
 
 #### Dataset C
-![Deteção - Dataset C](Imagens/T3D_.png)
+![Deteção - Dataset C](Imagens/T3C_.png)
 
 #### Dataset D
-![Deteção - Dataset D](Imagens/t3_dataset_D.png)
+![Deteção - Dataset D](Imagens/Ddet_000010_tarefa3.png)
 
 De forma geral, o método de janela deslizante apresenta bons resultados em cenários simples (A e B), mas o seu desempenho diminui ligeiramente em cenas mais complexas (C e D), especialmente devido ao maior número de dígitos e à variação de escalas.
 
