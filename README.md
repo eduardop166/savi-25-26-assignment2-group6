@@ -164,12 +164,15 @@ Esta estratégia reduz drasticamente o número de previsões necessárias e evit
 
 ### Resultados
 
-A figura seguinte apresenta um exemplo de deteção no **Dataset D**, o mais complexo, contendo múltiplos dígitos com diferentes escalas:
+A figura seguinte apresenta um exemplo de deteção para cada um dos datasets gerados.
 
-#### Dataset D
+#### Dataset A
 ![Deteção Melhorada - Dataset A](Imagens/T4A_.png)
+#### Dataset B
 ![Deteção Melhorada - Dataset B](Imagens/T4B_.png)
+#### Dataset C
 ![Deteção Melhorada - Dataset C](Imagens/T4C_.png)
+#### Dataset D
 ![Deteção Melhorada - Dataset D](Imagens/det_000009.png)
 
 ## Comparação — Tarefa 3 vs Tarefa 4
