@@ -81,6 +81,9 @@ Abaixo apresentam-se exemplos visuais e estatísticas de cada versão do dataset
 #### Dataset D
 ![Dataset D](Imagens/mosaic_D_test.png)
 
+#### Distribuição de classes para o dataset D
+![Distribuição de classes](Imagens/class_distribution_D_test.png)
+
 De forma geral, observa-se um aumento progressivo da complexidade dos dados desde o **Dataset A** até ao **Dataset D**, o que permite avaliar o impacto da densidade de objetos e da variação de tamanho na deteção de dígitos nas tarefas seguintes.
 
 
