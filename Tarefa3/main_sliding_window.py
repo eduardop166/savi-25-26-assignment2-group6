@@ -14,13 +14,12 @@ from tqdm import tqdm
 from model import ModelBetterCNN
 
 
-# ---------- Utils ----------
 def parse_window_sizes(s: str) -> List[int]:
     return [int(x.strip()) for x in s.split(",") if x.strip()]
 
 
 def normalize_mnist_like(x01: torch.Tensor) -> torch.Tensor:
-    # igual ao teu dataset.py (MNIST normalize)
+    # igual ao dataset.py (MNIST normalize)
     return (x01 - 0.1307) / 0.3081
 
 
@@ -69,15 +68,11 @@ def nms_xywh_strong(
     iou_thr: float,
     contain_thr: float
 ) -> List[int]:
-    """
-    Mantém as melhores caixas e remove:
-      - caixas com IoU alto
-      - caixas "quase iguais/contidas" via overlap_min (inter / area menor)
-    """
+
     if not boxes:
         return []
 
-    idxs = np.argsort(-np.array(scores))  # desc
+    idxs = np.argsort(-np.array(scores)) 
     keep: List[int] = []
 
     while len(idxs) > 0:
@@ -113,18 +108,15 @@ def main():
 
     # varrimento
     parser.add_argument("--max_images", type=int, default=100)
-    parser.add_argument("--stride", type=int, default=5) # Reduzi um pouco para ser mais preciso
+    parser.add_argument("--stride", type=int, default=5) # Reduz um pouco para ser mais preciso
     
-    # ALTERAÇÃO: Adicionei 40 para apanhar numeros maiores
     parser.add_argument("--window_sizes", type=str, default="28,40") 
-    parser.add_argument("--batch_windows", type=int, default=512) # Aumentei batch para GPU
+    parser.add_argument("--batch_windows", type=int, default=512) 
 
     # filtros
-    # ALTERAÇÃO: Baixei conf_thr para 0.85 (0.995 é muito exigente para numeros ruidosos)
     parser.add_argument("--conf_thr", type=float, default=0.85) 
     parser.add_argument("--entropy_thr", type=float, default=0.8)
     
-    # ALTERAÇÃO: Mudei de min_maxpix para min_std (desvio padrão).
     # Se std < 10, é fundo liso (preto ou branco)
     parser.add_argument("--min_std", type=float, default=10.0,
                         help="se std(crop) < isto, ignora (fundo liso)")
@@ -132,7 +124,6 @@ def main():
     parser.add_argument("--min_box", type=int, default=0,
                         help="ignora bboxes com w/h < min_box (0 desliga)")
 
-    # NMS forte
     parser.add_argument("--nms_iou", type=float, default=0.2)
     parser.add_argument("--contain_thr", type=float, default=0.6)
 
@@ -140,14 +131,13 @@ def main():
     parser.add_argument("--keep_topk", type=int, default=0,
                         help="se >0, mantém só top-K por score (0 desliga)")
     
-    # IMPORTANTE: Para a Tarefa 3, nunca uses isto ativado!
     parser.add_argument("--assume_single_digit", action="store_true",
                         help="para datasets A/B: mantém só a melhor deteção por imagem")
 
     args = parser.parse_args()
     os.makedirs(args.out_dir, exist_ok=True)
 
-    # ---- load model ----
+    # load model 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Running on {device}")
     model = ModelBetterCNN().to(device)
@@ -155,8 +145,7 @@ def main():
     model.load_state_dict(state)
     model.eval()
 
-    # ---- list images ----
-    # Ajuste para encontrar imagens mesmo se a pasta não tiver subpasta 'images'
+    # list images 
     if os.path.isdir(os.path.join(args.scene_dir, args.split, "images")):
         img_dir = os.path.join(args.scene_dir, args.split, "images")
     else:
@@ -195,12 +184,11 @@ def main():
                 for x in range(0, W - ws + 1, args.stride):
                     crop = arr[y:y + ws, x:x + ws]
 
-                    # --- ALTERAÇÃO: Filtro de Desvio Padrão ---
-                    # Muito melhor que max() para ignorar fundos
+                    # Filtro de Desvio Padrão
                     if np.std(crop) < args.min_std:
                         continue
 
-                    # (opcional) filtrar por tamanho mínimo
+                    # filtrar por tamanho mínimo
                     if args.min_box > 0 and ws < args.min_box:
                         continue
 
@@ -261,7 +249,7 @@ def main():
         labels = [labels[i] for i in keep]
         scores = [scores[i] for i in keep]
 
-        # ---------- keep top-K (opcional) ----------
+        # ---------- keep top-K  ----------
         if args.keep_topk and len(scores) > args.keep_topk:
             order = np.argsort(-np.array(scores))[:args.keep_topk]
             boxes  = [boxes[int(i)] for i in order]
@@ -269,7 +257,7 @@ def main():
             scores = [scores[int(i)] for i in order]
 
         # ---------- single-digit mode (A/B) ----------
-        # ALTERAÇÃO: Adicionei esta verificação extra para garantir que não corre na Tarefa 3
+        # verificação extra para garantir que não corre na Tarefa 3
         # Só corre se o user pedir explicitamente E se houver scores
         if args.assume_single_digit and len(scores) > 0:
             best = int(np.argmax(np.array(scores)))
@@ -301,7 +289,7 @@ def main():
         }, f, indent=2)
 
     dt = time.time() - t0
-    print("\n✅ Done")
+    print("\nDone")
     print("Output dir:", args.out_dir)
     print("detections.json:", out_json)
     print(f"Tempo total: {dt:.2f}s | {dt / max(1, len(all_imgs)):.2f}s por imagem")

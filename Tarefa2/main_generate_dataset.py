@@ -22,14 +22,12 @@ def boxes_intersect(a: Tuple[int, int, int, int], b: Tuple[int, int, int, int]) 
 
 
 def pick_digit_size(version: str, base_size: int, scale_min: int, scale_max: int, rng: np.random.Generator) -> int:
-    # Versões com escala: B e D (e.g. 22..36). Versões sem escala: A e C (fixo 28 por default).
     if version in ["B", "D"]:
         return int(rng.integers(scale_min, scale_max + 1))
     return base_size
 
 
 def pick_num_digits(version: str, rng: np.random.Generator, multi_min: int, multi_max: int) -> int:
-    # Versões multi: C e D (e.g. 3..5). Versões single: A e B (1).
     if version in ["C", "D"]:
         return int(rng.integers(multi_min, multi_max + 1))
     return 1
@@ -47,11 +45,7 @@ def generate_one_scene(
     max_tries_per_digit: int,
     rng: np.random.Generator,
 ) -> Tuple[np.ndarray, List[Dict[str, Any]]]:
-    """
-    Returns:
-      canvas (H,W) uint8
-      annotations: list of {"bbox":[x,y,w,h], "category_id":int}
-    """
+
     H = W = canvas_size
 
     # Se falhar a colocar (por falta de espaço), recomeça a cena
@@ -83,7 +77,7 @@ def generate_one_scene(
                 if any(boxes_intersect(new_box, old) for old in placed_boxes):
                     continue
 
-                # cola no canvas (sem overlap, pode ser assignment; uso maximum por segurança)
+                # cola no canvas (sem overlap)
                 roi = canvas[y:y+size, x:x+size]
                 canvas[y:y+size, x:x+size] = np.maximum(roi, digit_arr)
 
@@ -111,14 +105,14 @@ def main():
 
     # output / versões
     parser.add_argument("--version", type=str, default="A", choices=["A", "B", "C", "D"])
-    parser.add_argument("--out_dir", type=str, default="./data_scenes/versionA")
+    parser.add_argument("--out_dir", type=str, default="./data_scenes/A")
 
     # tamanhos / quantidades
     parser.add_argument("--canvas_size", type=int, default=128, help="ex: 100, 128")
     parser.add_argument("--n_train", type=int, default=60000)
     parser.add_argument("--n_test", type=int, default=10000)
 
-    # regras do enunciado
+    # regras 
     parser.add_argument("--avoid_overlap", action="store_true", default=True)
     parser.add_argument("--scale_min", type=int, default=22)
     parser.add_argument("--scale_max", type=int, default=36)
@@ -136,7 +130,7 @@ def main():
     args = parser.parse_args()
     rng = np.random.default_rng(args.seed)
 
-    # MNIST sem transform (PIL)
+    # MNIST sem transform
     mnist_train = MNIST(root=args.mnist_root, train=True, download=True)
     mnist_test = MNIST(root=args.mnist_root, train=False, download=True)
 
@@ -192,7 +186,7 @@ def main():
     with open(os.path.join(args.out_dir, "train", "annotations.json"), "w") as f:
         json.dump(coco_train, f, indent=2)
 
-    # ---- TEST ----
+    # TEST 
     coco_test = make_coco(categories)
     ann_id = 1
     img_id = 1
@@ -236,7 +230,7 @@ def main():
     with open(os.path.join(args.out_dir, "test", "annotations.json"), "w") as f:
         json.dump(coco_test, f, indent=2)
 
-    print("\n✅ Dataset gerado em:", args.out_dir)
+    print("\nDataset gerado em:", args.out_dir)
     print("   - train/images/*.png + train/annotations.json")
     print("   - test/images/*.png  + test/annotations.json")
 

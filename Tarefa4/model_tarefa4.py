@@ -14,8 +14,6 @@ class ModelIntegrated(nn.Module):
             nn.MaxPool2d(2)  # 16x16 -> 8x8
         )
         
-        # FCN Head: Substitui Linear(128*8*8, 256)
-        # O kernel 8x8 "resume" a área de 64x64 que a rede vê
         self.classifier = nn.Sequential(
             nn.Conv2d(128, 256, kernel_size=8), 
             nn.ReLU(),
@@ -34,7 +32,7 @@ class ModelIntegrated(nn.Module):
         cls_map = self.classifier(f)
         bbox_map = self.regressor(f)
         
-        # Ajuste para manter compatibilidade com o treino (Batch, C)
+        # Ajuste para manter compatibilidade com o treino
         if x.shape[2] == 64 and x.shape[3] == 64:
             cls_map = cls_map.view(x.size(0), -1)
             bbox_map = bbox_map.view(x.size(0), -1)

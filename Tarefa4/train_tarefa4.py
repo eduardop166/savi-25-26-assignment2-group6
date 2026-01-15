@@ -25,7 +25,7 @@ class DetectionDataset(Dataset):
         if idx % 2 == 0: # Caso com Dígito
             img, label = self.mnist[idx // 2]
             img = np.array(img)
-            # Posição aleatória (Lógica Tarefa 2)
+            # Posição aleatória 
             x, y = np.random.randint(0, 36), np.random.randint(0, 36)
             canvas[y:y+28, x:x+28] = img
             # BBox normalizada (x, y, w, h)
@@ -46,7 +46,7 @@ def train():
     optimizer = optim.Adam(model.parameters(), lr=0.001)
 
     print(f"Iniciando Treino Integrado na {device}...")
-    for epoch in range(2): # 5 épocas são suficientes para convergência inicial
+    for epoch in range(6): # Nº de épocas
         model.train()
         for imgs, labels, gt_bboxes in tqdm(loader):
             imgs, labels, gt_bboxes = imgs.to(device), labels.to(device), gt_bboxes.to(device)
@@ -63,9 +63,11 @@ def train():
             loss.backward()
             optimizer.step()
             
-    os.makedirs("experiments/tarefa4", exist_ok=True)
-    torch.save(model.state_dict(), "experiments/tarefa4/model_integrated.pth")
-    print("Modelo salvo com sucesso!")
+
+
+    os.makedirs(".", exist_ok=True)
+    torch.save(model.state_dict(), "model_integrated.pth")
+    print("Modelo salvo com sucesso em: C:\\UNIVERSIDADE\\Mestrado\\2o Ano\\SAVI\\savi-25-26-assignment2-group6\\Tarefa4\\model_integrated.pth")
 
 if __name__ == "__main__":
     train()

@@ -13,7 +13,7 @@ from matplotlib.patches import Rectangle
 def load_coco(path: str):
     with open(path, "r") as f:
         coco = json.load(f)
-    # index annotations by image_id
+    # image_id
     ann_by_img = defaultdict(list)
     for a in coco["annotations"]:
         ann_by_img[a["image_id"]].append(a)
@@ -66,7 +66,7 @@ def main():
     coco, ann_by_img = load_coco(ann_path)
     os.makedirs(args.out_dir, exist_ok=True)
 
-    # ---- Stats básicas ----
+    # Stats básicas
     num_images = len(coco["images"])
     all_labels = []
     num_digits_per_img = []
@@ -103,7 +103,7 @@ def main():
         for c in range(10):
             f.write(f"  {c}: {label_counts.get(c, 0)}\n")
 
-    # ---- Gráficos ----
+    # Gráficos 
     # hist nº dígitos por imagem
     plt.figure()
     plt.title("Histogram: digits per image")
@@ -137,7 +137,7 @@ def main():
     plt.savefig(os.path.join(args.out_dir, f"hist_bbox_width_{os.path.basename(args.dataset_dir)}_{args.split}.png"))
     plt.close()
 
-    # ---- Mosaico com bboxes ----
+    # Mosaico com bboxes
     mosaic_path = os.path.join(args.out_dir, f"mosaic_{os.path.basename(args.dataset_dir)}_{args.split}.png")
     draw_mosaic(images_dir, coco, ann_by_img, mosaic_path, n=args.mosaic_n, seed=args.seed)
 
@@ -147,4 +147,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main()  
