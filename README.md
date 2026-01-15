@@ -26,7 +26,7 @@ O desempenho do modelo foi avaliado no conjunto de teste do MNIST através das s
 
 A tabela seguinte apresenta os valores obtidos para cada dígito:
 
-![Tabela de Resultados - Tarefa 1](imagens/tabela1.png) | ![Tabela de Resultados - Tarefa 1](imagens/tabela2.png) 
+![Tabela de Resultados - Tarefa 1](Imagens/tabela1.png) | ![Tabela de Resultados - Tarefa 1](Imagens/tabela2.png) 
 
 
 
@@ -35,7 +35,7 @@ A tabela seguinte apresenta os valores obtidos para cada dígito:
 
 Para analisar os erros de classificação, foi também gerada a matriz de confusão:
 
-![Matriz de Confusão - Tarefa 1](imagens/confusion_matrix.png)
+![Matriz de Confusão - Tarefa 1](Imagens/confusion_matrix.png)
 
 De forma geral, o modelo apresenta elevada accuracy e métricas consistentes entre as diferentes classes, indicando uma boa capacidade de generalização. Os poucos erros observados concentram-se sobretudo em dígitos com formas visuais semelhantes, o que é esperado neste tipo de problema.
 
@@ -70,16 +70,16 @@ Para cada versão foram gerados conjuntos de treino e teste, sendo posteriorment
 Abaixo apresentam-se exemplos visuais e estatísticas de cada versão do dataset. As imagens ilustram tanto a **estrutura das cenas** como a **distribuição dos dígitos**, permitindo comparar a complexidade entre as quatro variantes.
 
 #### Dataset A
-![Dataset A](imagens/mosaic_A.png)
+![Dataset A](Imagens/mosaic_A.png)
 
 #### Dataset B
-![Dataset B](imagens/mosaic_B.png)
+![Dataset B](Imagens/mosaic_B.png)
 
 #### Dataset C
-![Dataset C](imagens/mosaic_C.png)
+![Dataset C](Imagens/mosaic_C.png)
 
 #### Dataset D
-![Dataset D](imagens/mosaic_D.png)
+![Dataset D](Imagens/mosaic_D.png)
 
 De forma geral, observa-se um aumento progressivo da complexidade dos dados desde o **Dataset A** até ao **Dataset D**, o que permite avaliar o impacto da densidade de objetos e da variação de tamanho na deteção de dígitos nas tarefas seguintes.
 
@@ -108,16 +108,16 @@ Para reduzir múltiplas deteções do mesmo dígito, é aplicado um processo de 
 De seguida apresentam-se exemplos de deteção para cada versão do dataset. As imagens mostram as *bounding boxes* previstas e a classe atribuída a cada dígito.
 
 #### Dataset A
-![Deteção - Dataset A](imagens/T3A_.png)
+![Deteção - Dataset A](Imagens/T3A_.png)
 
 #### Dataset B
-![Deteção - Dataset B](imagens/T3B_.png)
+![Deteção - Dataset B](Imagens/T3B_.png)
 
 #### Dataset C
-![Deteção - Dataset C](imagens/T3D_.png)
+![Deteção - Dataset C](Imagens/T3D_.png)
 
 #### Dataset D
-![Deteção - Dataset D](imagens/t3_dataset_D.png)
+![Deteção - Dataset D](Imagens/t3_dataset_D.png)
 
 De forma geral, o método de janela deslizante apresenta bons resultados em cenários simples (A e B), mas o seu desempenho diminui ligeiramente em cenas mais complexas (C e D), especialmente devido ao maior número de dígitos e à variação de escalas.
 
@@ -167,10 +167,10 @@ Esta estratégia reduz drasticamente o número de previsões necessárias e evit
 A figura seguinte apresenta um exemplo de deteção no **Dataset D**, o mais complexo, contendo múltiplos dígitos com diferentes escalas:
 
 #### Dataset D
-![Deteção Melhorada - Dataset A](imagens/T4A_.png)
-![Deteção Melhorada - Dataset B](imagens/T4B_.png)
-![Deteção Melhorada - Dataset C](imagens/T4C_.png)
-![Deteção Melhorada - Dataset D](imagens/det_000009.png)
+![Deteção Melhorada - Dataset A](Imagens/T4A_.png)
+![Deteção Melhorada - Dataset B](Imagens/T4B_.png)
+![Deteção Melhorada - Dataset C](Imagens/T4C_.png)
+![Deteção Melhorada - Dataset D](Imagens/det_000009.png)
 
 ## Comparação — Tarefa 3 vs Tarefa 4
 
@@ -204,22 +204,22 @@ A seguir apresentam-se exemplos lado a lado para cada dataset, mostrando os resu
 #### Dataset A
 | Tarefa 3 | Tarefa 4 |
 |---------|----------|
-| ![T3 A](imagens/T3A.png) | ![T4 A](imagens/T4A.png) |
+| ![T3 A](Imagens/T3A.png) | ![T4 A](Imagens/T4A.png) |
 
 #### Dataset B
 | Tarefa 3 | Tarefa 4 |
 |---------|----------|
-| ![T3 B](imagens/T3B.png) | ![T4 B](imagens/T4B.png) |
+| ![T3 B](Imagens/T3B.png) | ![T4 B](Imagens/T4B.png) |
 
 #### Dataset C
 | Tarefa 3 | Tarefa 4 |
 |---------|----------|
-| ![T3 C](imagens/T3C.png) | ![T4 C](imagens/T4C.png) |
+| ![T3 C](Imagens/T3C.png) | ![T4 C](Imagens/T4C.png) |
 
 #### Dataset D
 | Tarefa 3 | Tarefa 4 |
 |---------|----------|
-| ![T3 D](imagens/Ddet_000010_tarefa3.png) | ![T4 D](imagens/Ddet_000010.png) |
+| ![T3 D](Imagens/Ddet_000010_tarefa3.png) | ![T4 D](Imagens/Ddet_000010.png) |
 
 ---
 
