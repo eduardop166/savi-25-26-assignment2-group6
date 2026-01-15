@@ -144,6 +144,8 @@ Esta arquitetura foi escolhida por conseguir extrair padrões visuais relevantes
 
 Foi utilizada **Cross-Entropy Loss** para a classificação e otimização com **Adam**, garantindo uma convergência estável e bons resultados de generalização.
 
+No treino da Tarefa 4, o modelo passou a trabalhar com imagens de 64×64, onde os dígitos do MNIST são inseridos em posições aleatórias. Foi também introduzida uma nova classe, fundo, e incluídas imagens sem dígitos no treino, permitindo ao modelo aprender a distinguir entre objeto e não-objeto. Além disso, foi adicionada uma saída extra para a regressão das bounding boxes; no entanto, esta abordagem não apresentou resultados satisfatórios, pelo que optámos por seguir a estratégia de deteção baseada em segmentação e classificação descrita asseguir.
+
 ---
 
 ### Estratégia de Deteção
